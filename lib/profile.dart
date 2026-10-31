@@ -1,4 +1,4 @@
-    
+
     import 'package:flutter/material.dart';
 
     class ProfilePage extends StatelessWidget {
@@ -14,7 +14,7 @@
             title: const Text('Profil Pengguna'),
             centerTitle: true,
             backgroundColor: Colors.blueAccent,
-            foregroundColor: Colors.white,
+            foregroundColor: const Color.fromARGB(255, 12, 0, 10),
         ),
         body: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -24,11 +24,11 @@
                 children: [
                 const CircleAvatar(
                     radius: 50,
-                    backgroundColor: Colors.grey,
+                    backgroundColor: Color.fromARGB(245, 13, 13, 14),
                     child: Icon(
                     Icons.person,
                     size: 50,
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 131, 157, 211),
                     ),
                 ),
 
@@ -64,4 +64,3 @@
         );
     }
     }
-    
