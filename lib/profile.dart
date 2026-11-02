@@ -1,41 +1,78 @@
 import 'package:flutter/material.dart';
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
 
   final String userName = 'Anom.';
   final String role = 'Student';
 
+  static const List<String> experiences = [
+  'Campus Lost & Found - Firebase',
+  'Leaf AI Disease Analysis - Laravel & React',
+  'Sistem Penjualan Alat Pancing - PHP & MySQL',
+  'PesanFood Coffee Shop - HTML, CSS & JavaScript',
+];
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Aplikasi Profil',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Profil Pengguna'),
-          centerTitle: true,
-          backgroundColor: Colors.blueAccent,
-          foregroundColor: Colors.white,
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              const ProfileAvatar(),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Profil Pengguna'),
+        centerTitle: true,
+        backgroundColor: Colors.blueAccent,
+        foregroundColor: Colors.white,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            const ProfileAvatar(),
 
-              const SizedBox(height: 16),
+            const SizedBox(height: 16),
 
-              ProfileInfo(
-                userName: userName,
-                role: role,
+            ProfileInfo(
+              userName: userName,
+              role: role,
+            ),
+
+            const SizedBox(height: 24),
+
+            const ProfileStats(),
+
+            const SizedBox(height: 24),
+
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Pengalaman Kerja',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
+            ),
 
-              const SizedBox(height: 24),
+            const Divider(),
 
-              const ProfileStats(),
-            ],
-          ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: experiences.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    elevation: 2,
+                    margin: const EdgeInsets.symmetric(vertical: 6),
+                    child: ListTile(
+                      leading: const Icon(
+                        Icons.work,
+                        color: Colors.blueAccent,
+                      ),
+                      title: Text(experiences[index]),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -50,7 +87,11 @@ class ProfileAvatar extends StatelessWidget {
     return const CircleAvatar(
       radius: 50,
       backgroundColor: Colors.grey,
-      child: Icon(Icons.person, size: 50, color: Colors.white),
+      child: Icon(
+        Icons.person,
+        size: 50,
+        color: Colors.white,
+      ),
     );
   }
 }
@@ -77,10 +118,15 @@ class ProfileInfo extends StatelessWidget {
           ),
           textAlign: TextAlign.center,
         ),
+
         const SizedBox(height: 8),
+
         Text(
           role,
-          style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+          style: TextStyle(
+            fontSize: 16,
+            color: Colors.grey[700],
+          ),
           textAlign: TextAlign.center,
         ),
       ],
@@ -102,9 +148,18 @@ class ProfileStats extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          const StatItem(count: '3', label: 'Proyek'),
-          const StatItem(count: '1K', label: 'Followers'),
-          const StatItem(count: '2', label: 'Following'),
+          const StatItem(
+            count: '3',
+            label: 'Proyek',
+          ),
+          const StatItem(
+            count: '1K',
+            label: 'Followers',
+          ),
+          const StatItem(
+            count: '2',
+            label: 'Following',
+          ),
         ],
       ),
     );
@@ -133,7 +188,9 @@ class StatItem extends StatelessWidget {
             color: Colors.blueAccent,
           ),
         ),
+
         const SizedBox(height: 4),
+
         Text(
           label,
           style: TextStyle(
