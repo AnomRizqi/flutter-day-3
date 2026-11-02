@@ -6,8 +6,6 @@ class MainApp extends StatelessWidget {
   final String userName = 'Anom.';
   final String role = 'Student';
 
-  
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,77 +22,26 @@ class MainApp extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-                const ProfileAvatar(),
-                const SizedBox(height: 16),
-                ProfileInfo(
-                    userName: userName,
-                    role: role,
-                ),
-                const SizedBox(height: 24),
+              const ProfileAvatar(),
 
-Container(
-    padding: const EdgeInsets.symmetric(vertical: 12),
-    decoration: BoxDecoration(
-        color: Colors.blue[50],
-        borderRadius: BorderRadius.circular(12),
-    ),
-    child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-            Column(
-                children: [
-                    const Text(
-                        '3',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blueAccent,
-                        ),
-                    ),
-                    const SizedBox(height: 4),
-                    const Text('Proyek'),
-                ],
-            ),
+              const SizedBox(height: 16),
 
-            Column(
-                children: [
-                    const Text(
-                        '1K',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blueAccent,
-                        ),
-                    ),
-                    const SizedBox(height: 4),
-                    const Text('Followers'),
-                ],
-            ),
+              ProfileInfo(
+                userName: userName,
+                role: role,
+              ),
 
-            Column(
-                children: [
-                    const Text(
-                        '2',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blueAccent,
-                        ),
-                    ),
-                    const SizedBox(height: 4),
-                    const Text('Following'),
-                ],
-            ),
-        ],
-    ),
-),
-            ], 
+              const SizedBox(height: 24),
+
+              const ProfileStats(),
+            ],
           ),
         ),
       ),
     );
   }
 }
+
 class ProfileAvatar extends StatelessWidget {
   const ProfileAvatar({super.key});
 
@@ -141,3 +88,60 @@ class ProfileInfo extends StatelessWidget {
   }
 }
 
+class ProfileStats extends StatelessWidget {
+  const ProfileStats({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      decoration: BoxDecoration(
+        color: Colors.blue[50],
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          const StatItem(count: '3', label: 'Proyek'),
+          const StatItem(count: '1K', label: 'Followers'),
+          const StatItem(count: '2', label: 'Following'),
+        ],
+      ),
+    );
+  }
+}
+
+class StatItem extends StatelessWidget {
+  final String count;
+  final String label;
+
+  const StatItem({
+    super.key,
+    required this.count,
+    required this.label,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          count,
+          style: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.blueAccent,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 14,
+            color: Colors.grey[600],
+          ),
+        ),
+      ],
+    );
+  }
+}
