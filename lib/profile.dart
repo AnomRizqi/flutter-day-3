@@ -30,6 +30,64 @@ class MainApp extends StatelessWidget {
                     userName: userName,
                     role: role,
                 ),
+                const SizedBox(height: 24),
+
+Container(
+    padding: const EdgeInsets.symmetric(vertical: 12),
+    decoration: BoxDecoration(
+        color: Colors.blue[50],
+        borderRadius: BorderRadius.circular(12),
+    ),
+    child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+            Column(
+                children: [
+                    const Text(
+                        '3',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blueAccent,
+                        ),
+                    ),
+                    const SizedBox(height: 4),
+                    const Text('Proyek'),
+                ],
+            ),
+
+            Column(
+                children: [
+                    const Text(
+                        '1K',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blueAccent,
+                        ),
+                    ),
+                    const SizedBox(height: 4),
+                    const Text('Followers'),
+                ],
+            ),
+
+            Column(
+                children: [
+                    const Text(
+                        '2',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blueAccent,
+                        ),
+                    ),
+                    const SizedBox(height: 4),
+                    const Text('Following'),
+                ],
+            ),
+        ],
+    ),
+),
             ], 
           ),
         ),
@@ -82,3 +140,4 @@ class ProfileInfo extends StatelessWidget {
     );
   }
 }
+
