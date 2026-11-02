@@ -1,17 +1,78 @@
 import 'package:flutter/material.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
-  final String userName = 'Anom.';
-  final String role = 'Student';
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
 
-  static const List<String> experiences = [
-  'Campus Lost & Found - Firebase',
-  'Leaf AI Disease Analysis - Laravel & React',
-  'Sistem Penjualan Alat Pancing - PHP & MySQL',
-  'PesanFood Coffee Shop - HTML, CSS & JavaScript',
-];
+class _ProfilePageState extends State<ProfilePage> {
+  String userName = 'Anom Rizqi';
+  String role = 'Mahasiswa';
+
+  final List<String> experiences = [
+    'Campus Lost & Found - Firebase',
+    'Leaf AI Disease Analysis - Laravel & React',
+    'Sistem Penjualan Alat Pancing - PHP & MySQL',
+    'PesanFood Coffee Shop - HTML, CSS & JavaScript',
+  ];
+
+  void editProfile() {
+    final TextEditingController nameController =
+        TextEditingController(text: userName);
+
+    final TextEditingController roleController =
+        TextEditingController(text: role);
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Edit Profil'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextFormField(
+                controller: nameController,
+                decoration: const InputDecoration(
+                  labelText: 'Nama',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 16),
+              TextFormField(
+                controller: roleController,
+                decoration: const InputDecoration(
+                  labelText: 'Role',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Batal'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  userName = nameController.text;
+                  role = roleController.text;
+                });
+
+                Navigator.pop(context);
+              },
+              child: const Text('Simpan'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,21 +87,21 @@ class ProfilePage extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            const ProfileAvatar(),
-
+            ProfileAvatar(),
             const SizedBox(height: 16),
-
             ProfileInfo(
               userName: userName,
               role: role,
             ),
-
             const SizedBox(height: 24),
-
-            const ProfileStats(),
-
+            ElevatedButton.icon(
+              onPressed: editProfile,
+              icon: const Icon(Icons.edit),
+              label: const Text('Edit Profil'),
+            ),
             const SizedBox(height: 24),
-
+            ProfileStats(),
+            const SizedBox(height: 24),
             const Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -51,16 +112,14 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
             ),
-
             const Divider(),
-
             Expanded(
               child: ListView.builder(
                 itemCount: experiences.length,
                 itemBuilder: (context, index) {
                   return ExperienceCard(
                     experience: experiences[index],
-);
+                  );
                 },
               ),
             ),
@@ -78,10 +137,10 @@ class ProfileAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return const CircleAvatar(
       radius: 50,
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.blueAccent,
       child: Icon(
         Icons.person,
-        size: 50,
+        size: 60,
         color: Colors.white,
       ),
     );
@@ -108,18 +167,14 @@ class ProfileInfo extends StatelessWidget {
             fontSize: 22,
             fontWeight: FontWeight.bold,
           ),
-          textAlign: TextAlign.center,
         ),
-
         const SizedBox(height: 8),
-
         Text(
           role,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
-            color: Colors.grey[700],
+            color: Colors.grey,
           ),
-          textAlign: TextAlign.center,
         ),
       ],
     );
@@ -132,25 +187,25 @@ class ProfileStats extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 12),
+      padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        color: Colors.blue[50],
+        color: Colors.blueAccent.withOpacity(0.1),
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      child: const Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          const StatItem(
-            count: '3',
+          StatItem(
+            count: '4',
             label: 'Proyek',
           ),
-          const StatItem(
-            count: '1K',
-            label: 'Followers',
+          StatItem(
+            count: '4',
+            label: 'Pengalaman',
           ),
-          const StatItem(
-            count: '2',
-            label: 'Following',
+          StatItem(
+            count: '42',
+            label: 'Aktivitas',
           ),
         ],
       ),
@@ -177,23 +232,21 @@ class StatItem extends StatelessWidget {
           style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color: Colors.blueAccent,
           ),
         ),
-
         const SizedBox(height: 4),
-
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 14,
-            color: Colors.grey[600],
+            color: Colors.grey,
           ),
         ),
       ],
     );
   }
 }
+
 class ExperienceCard extends StatelessWidget {
   final String experience;
 
@@ -205,8 +258,7 @@ class ExperienceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 2,
-      margin: const EdgeInsets.symmetric(vertical: 6),
+      margin: const EdgeInsets.only(bottom: 12),
       child: ListTile(
         leading: const Icon(
           Icons.work,
