@@ -101,8 +101,8 @@ Belum ada, semua komponen masih berada di dalam `MainApp`.
 ### 8. Day 4 – Tombol Edit Profil
 
 * Menambahkan tombol Edit Profil menggunakan `ElevatedButton.icon`.
-* Menambahkan aksi pada tombol menggunakan `onPressed`.
-* Menggunakan `SnackBar` untuk menampilkan pemberitahuan bahwa fitur edit belum aktif.
+* Menambahkan aksi pada tombol menggunakan `onPressed`
+* Menggunakan `SnackBar` untuk menampilkan pemberitahuan bahwa fitur edit belum aktif
 
 **Pesan Commit:**
 `feat: add static edit button with snackbar notification`
